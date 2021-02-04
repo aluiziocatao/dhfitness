@@ -1,2 +1,2 @@
-# dhfitness
+# DH Fitness
 Projeto Integrador - Digital House Turma 10-2020
