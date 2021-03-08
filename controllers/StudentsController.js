@@ -34,25 +34,25 @@ module.exports = {
 
         students.forEach(dado => {
             if (dado.id == full_name_students) {
-                dado_Student = { email: dado.email }
+                dado_Student = { email: dado.email, id: dado.id }
             }
         });
 
         classes.forEach(dado => {
             if (dado.id_students == full_name_students) {
-                dado_Student = { email: dado_Student.email, id_plan: dado.id_plans, id_teacher: dado.id_teachers }
+                dado_Student = { id: dado_Student.id, email: dado_Student.email, id_plan: dado.id_plans, id_teacher: dado.id_teachers }
             }
         });
 
         teachers.forEach(dado => {
             if (dado.id == dado_Student.id_teacher) {
-                dado_Student = { email: dado_Student.email, id_plan: dado_Student.id_plan, id_teacher: dado_Student.id_teacher, full_name: dado.full_name, speciality: dado.speciality}
+                dado_Student = { id: dado_Student.id, email: dado_Student.email, id_plan: dado_Student.id_plan, id_teacher: dado_Student.id_teacher, full_name: dado.full_name, speciality: dado.speciality}
             }
         });
 
         plans.forEach(dado => {
             if (dado.id == dado_Student.id_plan) {
-                dado_Student = { email: dado_Student.email, id_plan: dado_Student.id_plan, id_teacher: dado_Student.id_teacher, full_name: dado_Student.full_name, speciality: dado_Student.speciality, title: dado.title }
+                dado_Student = { id: dado_Student.id, email: dado_Student.email, id_plan: dado_Student.id_plan, id_teacher: dado_Student.id_teacher, full_name: dado_Student.full_name, speciality: dado_Student.speciality, title: dado.title }
             }
         });
 
@@ -72,17 +72,39 @@ module.exports = {
         
         let new_student = await Student.findOne( { where: { email: emailStudents } });
         await Classe.create ( { id_students: new_student.id, id_teachers: full_teachers_students, id_plans: full_plan_students } );
+
+        res.render('students');
     },
 
     async edit (req, res, next) {
+        let id = req.params.id;
+        let student = await Student.findByPk(id);
 
+    res.render('edit-students', { student });
     },
 
     async update (req, res, next) {
+        let id = req.params.id;
+        let student = await Student.findByPk(id);
 
+        let { nomeStudents, emailStudents, full_plan_students, full_teachers_students } = req.body;
+        await Student.update({full_name: nomeStudents, email: emailStudents});
+        await Classe.update({id_teachers: full_teachers_students, id_plans: full_plan_students});
+
+    await student.save();
+
+    res.render('edit-students', { student, updated: true })
     },
 
     async delete (req, res, next) {
+        let id = req.params.id;
+        let student = await Student.findByPk(id);
 
+        student.deleted = true;
+        student.active = false;
+
+        await student.save();
+    
+    res.render('students');
     }
 }
