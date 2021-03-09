@@ -80,20 +80,22 @@ module.exports = {
         let id = req.params.id;
         let student = await Student.findByPk(id);
 
-    res.render('edit-students', { student });
+    res.render('students', { student });
     },
 
     async update (req, res, next) {
         let id = req.params.id;
         let student = await Student.findByPk(id);
-
         let { nomeStudents, emailStudents, full_plan_students, full_teachers_students } = req.body;
-        await Student.update({full_name: nomeStudents, email: emailStudents});
-        await Classe.update({id_teachers: full_teachers_students, id_plans: full_plan_students});
+
+        await Student.update({ full_name: nomeStudents, email: emailStudents });
+        
+        let new_student = await Student.findOne({ where: { email: emailStudents } });
+        await Classe.update({id_students: new_student.id, id_teachers: full_teachers_students, id_plans: full_plan_students});
 
     await student.save();
 
-    res.render('edit-students', { student, updated: true })
+    res.render('students', { student, updated: true })
     },
 
     async delete (req, res, next) {
