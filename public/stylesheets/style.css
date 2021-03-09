@@ -445,7 +445,7 @@ label #sidebar_btn:hover {
 }
 
 
-#popup_students_register.active_popup_students_edit {
+#popup_students_edit.active_popup_students_edit {
     visibility: visible;
     top: 20%;
     transition: 0.5s
@@ -887,3 +887,14 @@ footer .footer_inf h4 {
     padding-top: 30px;
     padding-bottom: 20px;
 }
+
+/*Exluir Aluno*/
+.excluir-aluno{
+    text-align: right;
+    position: relative;
+    color: #800;
+    display: flex;
+    margin-top: 5px;
+    padding-left: 350px;
+}
+/*Fim Excluir Aluno*/

@@ -50,9 +50,7 @@
                         <span><strong>Plano: </strong><%= dado_Student.title %></span>
                         <span><strong>Aula: </strong><%= dado_Student.speciality %></span>
                         <span><strong>Professor: </strong><%= dado_Student.full_name %></span>  
-                           
-                        <!--<a href="/students/alterar/<%=// dado_Student.id %> ">Editar</a>
-                        <a href="/students/excluir/<%= //dado_Student.id %> ">Excluir</a>-->
+                        <a class="excluir-aluno" href="/students/excluir/<%= dado_Student.id %> ">Excluir Aluno</a>
                     </div>
 
                 </div>
@@ -93,7 +91,7 @@
                                 </label>
                             </div>
                             <div class="inputStudents">
-                                <input type="submit" value="Cadastrar">
+                                <input type="submit" value="Editar">
                                 <input type="reset" value="Cancelar" onclick="toggle_popup_students_register();">
                             </div>   
                             
@@ -109,7 +107,7 @@
 
                     <div class="inputStudents">
                         <label for="emailStudents">E-mail:</label>
-                        <input type="email" name="emailStudents" id="emailStudents" value="<%= dado_Student.email %> " placeholder="Entre com E-Mail">
+                        <input type="email" name="emailStudents" id="emailStudents" value="<%= dado_Student.email %> ">
                     </div>
 
                     <div class="inputStudents">
@@ -132,8 +130,8 @@
                         </label>
                     </div>
                     <div class="inputStudents">
-                        <input type="submit" value="Cadastrar">
-                        <input type="reset" value="Cancelar" onclick="toggle_popup_students_edit();">
+                        <input type="submit" value="Editar">
+                        <input type="reset" value="Cancela" onclick="toggle_popup_students_edit();">
                     </div>   
                     
                 </form>
