@@ -896,5 +896,6 @@ footer .footer_inf h4 {
     display: flex;
     margin-top: 5px;
     padding-left: 350px;
+    justify-content: space-between;
 }
 /*Fim Excluir Aluno*/
